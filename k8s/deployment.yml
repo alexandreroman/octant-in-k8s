@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: octant
+  template:
+    metadata:
+      labels:
+        app: octant
+    spec:
+      containers:
+        - image: octant
+          name: octant
+          command: ["/usr/local/bin/octant"]
+          args:
+            - --kubeconfig
+            - /etc/octant/kubeconfig
+            - --disable-open-browser
+            - --listener-addr
+            - 0.0.0.0:7777
+            - --ui-url
+            # Set the Fully Qualified Domain Name to use when exposing Octant.
+            # This value must match the fqdn parameter in ingress.yml.
+            - kubernetes.withtanzu.com
+          volumeMounts:
+            - name: kubeconfig-volume
+              mountPath: /etc/octant
+          resources:
+            limits:
+              memory: 512Mi
+          ports:
+            - name: http
+              containerPort: 7777
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /
+            initialDelaySeconds: 10
+            periodSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /
+            initialDelaySeconds: 10
+      volumes:
+        - name: kubeconfig-volume
+          secret:
+            secretName: kubeconfig

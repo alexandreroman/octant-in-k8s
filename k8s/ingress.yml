@@ -1,0 +1,15 @@
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: ingress
+spec:
+  virtualhost:
+    # Set the Fully Qualified Domain Name to use when exposing Octant.
+    # This value must match the ui-url parameter in deployment.yml.
+    fqdn: kubernetes.withtanzu.com
+  routes:
+    - services:
+        - name: octant
+          port: 8080
+      enableWebsockets: true
