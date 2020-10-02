@@ -8,6 +8,10 @@ spec:
     # Set the Fully Qualified Domain Name to use when exposing Octant.
     # This value must match the ui-url parameter in deployment.yml.
     fqdn: kubernetes.withtanzu.com
+    # Uncomment if you have a secret with TLS certificates available.
+    #tls:
+    #  secretName: octant/tls-secret
+    #permitUnsecure: false
   routes:
     - services:
         - name: octant

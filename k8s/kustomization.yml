@@ -7,10 +7,18 @@ resources:
 - deployment.yml
 - service.yml
 - ingress.yml
+generatorOptions:
+  disableNameSuffixHash: true
 secretGenerator:
   - name: kubeconfig
     files:
       - kubeconfig
+  # Uncomment to deploy your TLS certificates as a Kubernetes secret.
+  #- name: tls-secret
+  #  files:
+  #    - tls.crt
+  #    - tls.key
+  #  type: "kubernetes.io/tls"
 images:
 - name: octant
   newName: alexandreroman/octant:0.16.0
