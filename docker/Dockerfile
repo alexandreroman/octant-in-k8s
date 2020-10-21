@@ -1,10 +1,10 @@
 FROM ubuntu:bionic AS builder
-ARG OCTANT_VERSION=0.16.0
+ARG OCTANT_VERSION=0.16.1
 RUN apt-get update && \
     apt-get install -y wget
 RUN wget "https://github.com/vmware-tanzu/octant/releases/download/v${OCTANT_VERSION}/octant_${OCTANT_VERSION}_Linux-64bit.tar.gz"
-RUN tar zxf octant_0.16.0_Linux-64bit.tar.gz && \
-    mv octant_0.16.0_Linux-64bit/octant /root/octant
+RUN tar zxf octant_${OCTANT_VERSION}_Linux-64bit.tar.gz && \
+    mv octant_${OCTANT_VERSION}_Linux-64bit/octant /root/octant
 
 FROM ubuntu:bionic
 COPY --from=builder /root/octant /usr/local/bin/octant
