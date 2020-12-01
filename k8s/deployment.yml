@@ -18,6 +18,8 @@ spec:
           name: octant
           command: ["/usr/local/bin/octant"]
           args:
+            - --namespace
+            - default
             - --kubeconfig
             - /etc/octant/kubeconfig
             - --disable-open-browser
