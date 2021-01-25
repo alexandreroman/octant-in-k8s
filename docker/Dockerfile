@@ -1,5 +1,5 @@
 FROM ubuntu:bionic AS builder
-ARG OCTANT_VERSION=0.16.2
+ARG OCTANT_VERSION=0.16.3
 RUN apt-get update && \
     apt-get install -y wget
 RUN wget "https://github.com/vmware-tanzu/octant/releases/download/v${OCTANT_VERSION}/octant_${OCTANT_VERSION}_Linux-64bit.tar.gz"

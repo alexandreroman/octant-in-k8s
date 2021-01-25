@@ -21,4 +21,4 @@ secretGenerator:
   #  type: "kubernetes.io/tls"
 images:
 - name: octant
-  newName: alexandreroman/octant:0.16.2
+  newName: alexandreroman/octant:0.16.3
